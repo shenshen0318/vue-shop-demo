@@ -1,27 +1,31 @@
+/**
+ * 路由文件
+ */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
+// 导入组件
+import Login from '../components/Login.vue'
 
 Vue.use(VueRouter)
 
+// 路由信息配置
 const routes = [
+  // 路由重定向
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/login'
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/login',
+    component: Login
   }
 ]
 
+// 创建路由实例
 const router = new VueRouter({
   routes
 })
 
+// 导出
 export default router

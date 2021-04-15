@@ -1,0 +1,51 @@
+{
+  "id": "2489788",
+  "name": "vue-shop-demo",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "12665053",
+      "name": "QQ",
+      "font_class": "QQ",
+      "unicode": "e6e2",
+      "unicode_decimal": 59106
+    },
+    {
+      "icon_id": "13655531",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
+      "icon_id": "395714",
+      "name": "眼睛",
+      "font_class": "yanjing",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "1966226",
+      "name": "眼睛 (1)",
+      "font_class": "yanjing1",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "20853339",
+      "name": "密码",
+      "font_class": "mima",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "20853365",
+      "name": "用户名",
+      "font_class": "yonghuming",
+      "unicode": "e6aa",
+      "unicode_decimal": 59050
+    }
+  ]
+}
