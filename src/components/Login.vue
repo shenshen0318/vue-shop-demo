@@ -135,7 +135,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .login-container {
     height: 100%;
     background-color: #2d3a4b;
@@ -220,6 +220,9 @@ export default {
     bottom: 2px;
 }
 
+.icon-yanjing1, .icon-yanjing{
+    font-size: 20px;
+}
 .social {
     margin: 20px 0;
 }

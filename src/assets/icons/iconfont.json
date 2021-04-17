@@ -6,6 +6,76 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5382837",
+      "name": "退出全屏",
+      "font_class": "tuichuquanping",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "9819261",
+      "name": "侧边栏",
+      "font_class": "cebianlan",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "12495860",
+      "name": "商品管理",
+      "font_class": "shangpinguanli",
+      "unicode": "e69d",
+      "unicode_decimal": 59037
+    },
+    {
+      "icon_id": "13071703",
+      "name": "订单管理",
+      "font_class": "logooo_huabanfuben",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "15998114",
+      "name": "退出",
+      "font_class": "tuichu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "17776353",
+      "name": "用户 管理",
+      "font_class": "yonghuguanli",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "17839864",
+      "name": "侧边栏",
+      "font_class": "cebianlan-you",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "18705882",
+      "name": "权限管理",
+      "font_class": "quanxianguanli",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "20392482",
+      "name": "数据统计",
+      "font_class": "shujutongji",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    },
+    {
+      "icon_id": "20885307",
+      "name": "屏幕_全屏",
+      "font_class": "fullScreen",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
       "icon_id": "12665053",
       "name": "QQ",
       "font_class": "QQ",
