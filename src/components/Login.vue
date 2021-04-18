@@ -115,18 +115,18 @@ export default {
         // 登录
         login(){
             this.$refs.loginForm.validate(async (valid)=>{
-                console.log(valid);
+                // console.log(valid);
                 if(!valid) return;
                 // 否则 通过 axios 发起请求 返回的是一个 promise 对象  可以通过 async 和 await 简化
                 const result = await this.$http.post('login', this.loginForm);
-                console.log(result.data);
+                // console.log(result.data);
                 if(result.data.meta.status !== 200) return this.$message.error('登录失败!')
                 this.$message.success('登录成功!')
                 // 1. 将登录成功之后的 token 保存到客户端的 sessionStorage 中
                 //   1.1 项目中除了登录之外的其他 api，必须在登录之后才能访问（原因）
                 //   1.2 token 只应在当前网站打开期间生效，所以将 token 保存在 sessionStorage 中
                 window.sessionStorage.setItem('token', result.data.data.token);
-                console.log(result.data.data.token);
+                // console.log(result.data.data.token);
                 // 2. 通过编程式导航跳转到后台主页  /home
                 this.$router.push('/home');
             })

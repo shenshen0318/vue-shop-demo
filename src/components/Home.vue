@@ -11,7 +11,9 @@
         :collapse = "!fullSideBar"
         :collapse-transition = "false"
         :router="true"
+        :default-active = "activePath"
       >
+        <!-- 高亮当前活跃目录的方法 :default-active = "this.$route.path" -->
         <!-- 一级菜单 -->
         <el-submenu :index="item.id + ''" v-for="(item, i) in menuList" :key="item.id">
           <template slot="title">
@@ -19,7 +21,7 @@
             <span>{{item.authName}}</span>
           </template>
           <!-- 二级菜单 -->
-          <el-menu-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id">
+          <el-menu-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavPath('/' + subItem.path)">
             <i class="el-icon-menu"></i>
             {{subItem.authName}}
           </el-menu-item>
@@ -30,10 +32,10 @@
     <el-container>
       <!-- 头部 -->
       <el-header>
-        <i :class="fullSideBar === true? 'iconfont icon-cebianlan' : 'iconfont icon-cebianlan-you'" @click="triggleSideBar"></i>
+        <i :class="fullSideBar === true? 'iconfont icon-cebianlan' : 'iconfont icon-cebianlan-you'" @click="triggleSideBar()"></i>
         <div class="right-header">
-          <i :class=" fullScreen ? 'iconfont icon-tuichuquanping' : 'iconfont icon-fullScreen'" @click="triggleFullScreen"></i>
-          <el-button type="info" @click="logout">退出</el-button>
+          <i :class=" fullScreen ? 'iconfont icon-tuichuquanping' : 'iconfont icon-fullScreen'" @click="triggleFullScreen()"></i>
+          <el-button type="info" @click="logout()">退出</el-button>
         </div>
       </el-header>
       <!-- 主体区域 -->
@@ -65,6 +67,8 @@ export default {
       fullSideBar: true,
       // 全屏
       fullScreen: false,
+      // 处于激活状态的path
+      activePath: ''
     };
   },
   methods: {
@@ -76,7 +80,7 @@ export default {
     },
     async getMenuList(){
       const {data: res} = await this.$http.get('/menus')
-      console.log(res);
+      // console.log(res);
       this.menuList = res.data;
     },
     triggleSideBar(){
@@ -93,10 +97,17 @@ export default {
       // }
       screenfull.toggle();
       this.fullScreen = !this.fullScreen
+    },
+    // 保存当前的路径
+    saveNavPath(activePath){
+      window.sessionStorage.setItem('activePath', activePath);
+      this.activePath = activePath;
     }
   },
   created(){
     this.getMenuList()
+    // 赋值当前活跃地址
+    this.activePath = window.sessionStorage.getItem('activePath')
   }
 };
 </script>
@@ -105,7 +116,7 @@ export default {
 .home-container {
   height: 100%;
 }
-el-aside {
+.el-aside {
   background-color: rgb(48, 65, 86);
   color: rgb(191, 203, 217);
   // padding: 0 20px;
@@ -155,7 +166,7 @@ el-aside {
 }
 .el-main {
   background-color: #f0f2f5;
-  padding: 32px;
+  padding: 10px 20px;
 }
 .el-menu-item {
   background-color: #1f2d3d
