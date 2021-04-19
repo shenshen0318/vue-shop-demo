@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3639555",
+      "name": "购物车",
+      "font_class": "gouwuche",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "5134786",
+      "name": "钱",
+      "font_class": "qian",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "14956161",
+      "name": "消 息",
+      "font_class": "xiaoxi",
+      "unicode": "e729",
+      "unicode_decimal": 59177
+    },
+    {
       "icon_id": "5382837",
       "name": "退出全屏",
       "font_class": "tuichuquanping",
