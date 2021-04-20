@@ -40,9 +40,9 @@
         <el-table-column label="操作" width="180px">
           <template slot-scope="scope">
             <!-- 编辑按钮 -->
-            <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
+            <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.id)"></el-button>
             <!-- 删除按钮 -->
-            <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+            <el-button type="danger" icon="el-icon-delete" size="mini" @click="delUser(scope.row.id)"></el-button>
             <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
               <!-- 设置按钮 -->
               <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
@@ -93,6 +93,30 @@
       </span>
     </el-dialog>
 
+    <!-- 修改用户弹出框 -->
+    <el-dialog
+      title="编辑用户"
+      :visible.sync="editDialogVisible"
+      width="50%"
+      @closed="editDialogClosed">
+      <!-- 内容主体区域 -->
+      <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="80px">
+        <el-form-item label="用户名">
+          <el-input v-model="editForm.username" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="editForm.email"></el-input>
+        </el-form-item>
+        <el-form-item label="手机" prop="mobile">
+          <el-input v-model="editForm.mobile"></el-input>
+        </el-form-item>
+      </el-form>
+      <!-- 底部按钮区域 -->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editUser(editForm.id)">确 定</el-button>
+      </span>
+    </el-dialog>
 
   </div>
 </template>
@@ -151,6 +175,19 @@ export default {
           {required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 15, message: '密码的长度在 6 到 15 个字符', trigger: 'blur' }
         ],
+        email: [
+          {required: true, message: '请输入邮箱', trigger: 'blur' },
+           { validator: checkEmail, trigger: 'blur' }
+        ],
+        mobile: [
+          {required: true, message: '请输入手机号', trigger: 'blur' },
+          { validator: checkMobile, trigger: 'blur' }
+        ]
+      },
+      // 编辑用户弹出框
+      editDialogVisible: false,
+      editForm: {},
+      editFormRules: {
         email: [
           {required: true, message: '请输入邮箱', trigger: 'blur' },
            { validator: checkEmail, trigger: 'blur' }
@@ -225,7 +262,59 @@ export default {
         // 重新获取用户列表数据
         this.getUserList();
       })
-    
+    },
+    // 显示编辑用户的弹出框
+    async showEditDialog(id){
+      this.editDialogVisible = true;
+      const {data : res} = await this.$http.get('users/' + id);
+      // console.log(res);
+      if(res.meta.status !== 200){
+        return this.$message.error('查询用户列表失败');
+      }
+      this.editForm = res.data;
+    },
+    // 关闭编辑用户弹出框时重置
+    editDialogClosed(){
+      this.$refs.editFormRef.resetFields();
+    },
+    // 点击按钮修改用户
+    editUser(id){
+      this.$refs.editFormRef.validate(async (valid)=> {
+        // console.log(valid);
+        // 预验证失败 直接返回
+        if(!valid) return;
+        // 验证成功，发起添加用户的网络请求
+        let {data: res} = await this.$http.put('users/' + id, {email: this.editForm.email, mobile: this.editForm.mobile})
+        if(res.meta.status !== 200){
+          this.$message.error('编辑用户失败');
+        }
+        this.$message.success('编辑用户成功');
+        this.editDialogVisible = false;
+        // 重新获取用户列表数据
+        this.getUserList();
+      })
+    },
+    // 点击删除用户
+    async delUser(id){
+      // console.log(id);
+      // 删除用户提示框 如果点击的是取消按钮 是会抛出一个错误信息， 要用 catch 接收
+      const delRes = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).catch(()=>{
+        this.$message.info("已取消删除")
+      })
+      if(delRes !== 'confirm') return;
+      // 发送 delete 请求
+      const {data:res} = await this.$http.delete("users/" + id);
+      console.log(res);
+      if(res.meta.status !== 200){
+        this.$message.error('删除用户失败');
+      }
+      this.$message.success('删除用户成功');
+      // 重新获取用户列表数据
+      this.getUserList();
     }
   }
 }
