@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { Button, Form, FormItem, Input, Dialog, Message, Container, Header, Main, Aside,
   Menu, Submenu, MenuItem, Breadcrumb, BreadcrumbItem, Card, Row, Col, Table, TableColumn, Switch,
-  Tooltip, Pagination, Progress, MessageBox} from 'element-ui'
+  Tooltip, Pagination, Progress, MessageBox, Tag} from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Form)
@@ -26,6 +26,7 @@ Vue.use(Switch)
 Vue.use(Tooltip)
 Vue.use(Pagination)
 Vue.use(Progress)
+Vue.use(Tag)
 
 // Message 需要全局挂载到 vue 的原型上
 Vue.prototype.$message = Message
